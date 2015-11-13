@@ -20,7 +20,7 @@ class GameApp:
             msg = "WINNER! The number was {} and you guessed it.".format(str(self.goal))
         else:
             msg = "OUT OF GUESSES. The number was {}.".format(str(self.goal))
-        self.interface.result_message(msg)
+        self.interface.messages(msg)
         if self.interface.play_again():
             self.guess_count = 0
             self.guesses = [ "_", "_", "_", "_", "_" ]
@@ -31,10 +31,10 @@ class GameApp:
     def input_validation(self):
         value = self.interface.check_type(self.guesses)
         while int(value) < 1 or int(value) > 10000 or value[0] == "0":
-            self.interface.error_messages("range", value)
+            self.interface.messages("{} is not in range.".format(value))
             value = self.interface.check_type(self.guesses)
         while value in self.guesses:
-            self.interface.error_messages("dups", value)
+            self.interface.messages("You already guessed {}.".format(value))
             value = self.interface.check_type(self.guesses)
         return value
 

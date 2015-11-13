@@ -18,23 +18,17 @@ class TextInterface:
         play_again = input("Do you want to play again? ")
         return play_again[0] in "yY"
 
-    def error_messages(self, error, value):
-        errors = { "type": "'{}' is not an integer.".format(value),
-                   "range": "{} is not in range.".format(str(value)),
-                   "dups": "You already guessed {}.".format(str(value)) }
-        print(errors[error])
-
     def check_type(self, guesses):
-        value = self.get_guess(guesses)
-        try:
-            int(value)
-        except ValueError:
-            self.error_messages("type", value)
-            return self.get_guess(guesses)
-        return value
+        while True:
+            value = self.get_guess(guesses)
+            try:
+                int(value)
+                return value
+            except ValueError:
+                self.messages("'{}' is not an integer.".format(value))
 
     def get_guess(self, guesses):
         return input("Enter an integer from 1 to 10,000: ")
 
-    def result_message(self, msg):
+    def messages(self, msg):
         print(msg)
