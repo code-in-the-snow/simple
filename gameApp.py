@@ -7,14 +7,14 @@ from random import randint
 
 class GameApp:
     def __init__(self, interface):
-        self.goal = 21 #randint(1, 10001)
+        self.goal = randint(1, 10001)
         self.guess_count = 0
-        self.guesses = [ "_", "_", "_", "_","_" ]
+        self.guesses = [ "_", "_", "_", "_","_", "_", "_" ]
         self.interface = interface
 
     def run(self):
         self.interface.show_state(self.guesses)
-        while self.guess_count < 5 and (str(self.goal) not in self.guesses):
+        while self.guess_count < 7 and (str(self.goal) not in self.guesses):
             self.play_round()
         if str(self.goal) in self.guesses:
             msg = "WINNER! The number was {} and you guessed it.".format(str(self.goal))
@@ -40,6 +40,10 @@ class GameApp:
 
     def play_round(self):
         cur_guess = self.input_validation()
+        if int(cur_guess) < self.goal:
+            self.interface.messages("Too low.")
+        elif int(cur_guess) > self.goal:
+            self.interface.messages("Too high.")
         self.guesses[self.guess_count] = cur_guess
         self.interface.show_state(self.guesses)
         self.guess_count += 1
