@@ -28,18 +28,27 @@ class GameApp:
         else:
             self.interface.close()
 
-    def input_validation(self):
-        value = self.interface.check_type(self.guesses)
+    def check_type(self):
+        while True:
+            value = self.interface.get_guess()
+            try:
+                int(value)
+                return value
+            except ValueError:
+                self.interface.messages("'{}' is not an integer.".format(value))
+
+    def return_guess(self):
+        value = self.check_type()
         while int(value) < 1 or int(value) > 10000 or value[0] == "0":
             self.interface.messages("{} is not in range.".format(value))
-            value = self.interface.check_type(self.guesses)
+            value = self.check_type()
         while value in self.guesses:
             self.interface.messages("You already guessed {}.".format(value))
-            value = self.interface.check_type(self.guesses)
+            value = self.check_type()
         return value
 
     def play_round(self):
-        cur_guess = self.input_validation()
+        cur_guess = self.return_guess()
         if int(cur_guess) < self.goal:
             self.interface.messages("Too low.")
         elif int(cur_guess) > self.goal:
