@@ -6,7 +6,7 @@
 class TextInterface:
     def __init__(self):
         print("Welcome to Guess an Integer.")
-        print("In this game, you have chances to guess a number from 1 to 10,000.\n")
+        print("In this game, you have 7 chances to guess a number from 1 to 10,000.\n")
 
     def close(self):
         print("Thank you for playing!\n")

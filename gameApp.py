@@ -22,8 +22,9 @@ class GameApp:
             msg = "OUT OF GUESSES. The number was {}.".format(str(self.goal))
         self.interface.messages(msg)
         if self.interface.play_again():
+            self.goal = randint(1, 10001)
             self.guess_count = 0
-            self.guesses = [ "_", "_", "_", "_", "_" ]
+            self.guesses = [ "_", "_", "_", "_","_", "_", "_" ]
             self.run()
         else:
             self.interface.close()
