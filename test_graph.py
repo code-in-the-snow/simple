@@ -1,6 +1,6 @@
-# 11-14-2015
-# graphic_interface.py
-# Interface for graphic UI of simple guessing game.
+# 11-26-2015
+# test_graph.py
+# Working design to return value from Entry item
 
 from tkinter import *
 import pdb
@@ -15,17 +15,11 @@ class GraphicInterface:
         self.entry_var = StringVar()
 
         self.show_state(["_", "_", "_", "_", "_", "_" ]) # for testing
-
         INTRO = "Welcome! You will have 7 chances to Guess the Number."
         self.messages(INTRO)
-
-
         print(self.get_guess()) # for testing
-
-
         self.master.mainloop()
-
-
+        label3.pack()
 
     def close(self):
         self.master.destroy
@@ -58,5 +52,3 @@ class GraphicInterface:
 
     def messages(self, msg):
         label3 = Label(self.master, text=msg, bg="grey", pady=50, font = "Times 20")
-
-        label3.pack()

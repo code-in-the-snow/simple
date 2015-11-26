@@ -6,10 +6,13 @@
 from random import randint
 
 class GameApp:
+
     def __init__(self, interface):
+        NEW_GAME = [ "_", "_", "_", "_", "_", "_", "_" ]
         self.goal = randint(1, 10001)
         self.guess_count = 0
-        self.guesses = [ "_", "_", "_", "_","_", "_", "_" ]
+        # self.guesses = [ "_", "_", "_", "_","_", "_", "_" ]
+        self.guesses = NEW_GAME
         self.interface = interface
 
     def run(self):
