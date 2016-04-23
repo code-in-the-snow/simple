@@ -3,8 +3,8 @@
 # Script that calls game app and interface.
 
 from gameApp import GameApp
-from text_interface import TextInterface
+from graphic_interface import GraphicInterface
 
-interface = TextInterface()
+interface = GraphicInterface()
 game = GameApp(interface)
 game.run()

@@ -42,10 +42,13 @@ class GameApp:
                 self.interface.messages("'{}' is not an integer.".format(value))
 
     def return_guess(self):
+        #check the guess is a number
         value = self.check_type()
+        #check the guess is in the game range
         while int(value) < 1 or int(value) > 10000 or value[0] == "0":
             self.interface.messages("{} is not in range.".format(value))
             value = self.check_type()
+        #check current valued was not already guessed
         while value in self.guesses:
             self.interface.messages("You already guessed {}.".format(value))
             value = self.check_type()
