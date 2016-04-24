@@ -4,15 +4,14 @@
 #    easily extensible to more complicated game.
 
 from random import randint
+import pdb
 
 class GameApp:
 
     def __init__(self, interface):
-        NEW_GAME = [ "_", "_", "_", "_", "_", "_", "_" ]
         self.goal = randint(1, 10001)
         self.guess_count = 0
-        # self.guesses = [ "_", "_", "_", "_","_", "_", "_" ]
-        self.guesses = NEW_GAME
+        self.guesses = [ "_", "_", "_", "_", "_", "_", "_" ]
         self.interface = interface
 
     def run(self):
@@ -27,7 +26,7 @@ class GameApp:
         if self.interface.play_again():
             self.goal = randint(1, 10001)
             self.guess_count = 0
-            self.guesses = [ "_", "_", "_", "_","_", "_", "_" ]
+            self.guesses = [ "_", "_", "_", "_", "_", "_", "_" ]
             self.run()
         else:
             self.interface.close()
@@ -39,7 +38,7 @@ class GameApp:
                 int(value)
                 return value
             except ValueError:
-                self.interface.messages("'{} 'is not an integer.".format(value))
+                self.interface.messages("'{} ' is not an integer.".format(value))
 
     def return_guess(self):
         #check the guess is a number
