@@ -39,7 +39,7 @@ class GameApp:
                 int(value)
                 return value
             except ValueError:
-                self.interface.messages("'{}' is not an integer.".format(value))
+                self.interface.messages("'{} 'is not an integer.".format(value))
 
     def return_guess(self):
         #check the guess is a number

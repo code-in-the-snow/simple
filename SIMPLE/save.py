@@ -8,20 +8,16 @@ import pdb, time, os, sys
 class GraphicInterface:
     def __init__(self):
         self.master = Tk()
-        self.master.minsize(width=666, height=333)
+        # self.master.minsize(width=666, height=333)
+        # self.master.configure(bg="grey")
+        # self.master.title("Guess the Number")
         self.parent = Frame(self.master)
         self.parent.configure(bg="grey")
         self.parent.master.title("Guess the Number")
         self.parent.pack(fill=BOTH, expand=True)
-        # self.mouseX = None
-        # self.mouseY = None
-        self.clicked = False
-        self.playAgainVar = None
+        self.mouseX = None
+        self.mouseY = None
         self.master.bind("<Button-1>", self._onClick)
-
-        row = Frame(self.parent)
-        row.configure(bg="grey", height=30)
-        row.pack()
 
         row1 = Frame(self.parent)
         row1.configure(bg="grey")
@@ -49,30 +45,15 @@ class GraphicInterface:
         row4.configure(bg="grey")
         row4.pack(fill=X)
         self.m = StringVar()
-        labelMessage = Label(row4, textvariable=self.m, bg="grey", pady=50, font = "Times 20")
-        labelMessage.pack()
+        self.labelMessage = Label(row4, textvariable=self.m, bg="grey", pady=50, font = "Times 20")
+        self.labelMessage.pack()
 
-        self.drawButtons()
-
-    def _onClick(self, e):
-        # self.mouseX = e.x
-        # self.mouseY = e.y
-        self.clicked = True
-
-    def _onEnd(self):
-        self.playAgainVar = True
-
-    def _onPlayAgain(self):
-        self.messages(" ")
-        self.playAgainVar = True
-
-    def drawButtons(self):
         row5 = Frame(self.parent)
         row5.configure(bg="grey")
         row5.pack()
         self.buttonSubmit = Button(row5, text="Submit", width=15).pack(side=LEFT, padx=70)
-        self.buttonPlayAgain = Button(row5, text="Play Again", width=15, command=self._onPlayAgain).pack(side=LEFT, padx=15)
-        self.buttonEnd = Button(row5, text="End Game", width=15, command=self._onEnd).pack(side=LEFT, padx=15)
+        self.buttonPlayAgain = Button(row5, text="Play Again", width=15).pack(side=LEFT, padx=15)
+        self.buttonEnd = Button(row5, text="End Game", width=15).pack(side=LEFT, padx=15)
 
     def close(self):
         self.getMouse()
@@ -80,7 +61,6 @@ class GraphicInterface:
 
     def get_guess(self):
         self.e.focus_set()
-        #while NEED TO SET UP A TRIGGER VAR THAT CHANGES ON SUBMIT CLICK
         self.getMouse()
         guess = self.e.get()
         self.e.delete(0, END)
@@ -90,18 +70,18 @@ class GraphicInterface:
         """Wait for mouse click and return Point object representing
         the click"""
         self.master.update()      # flush any prior clicks
-        # self.mouseX = None
-        # self.mouseY = None
-        self.clicked = False
-        while self.clicked == False: #self.mouseX == None or self.mouseY == None
+        self.mouseX = None
+        self.mouseY = None
+        while self.mouseX == None or self.mouseY == None:
             self.master.update()
             time.sleep(.1) # give up thread
 
+    def _onClick(self, e):
+        self.mouseX = e.x
+        self.mouseY = e.y
+
     def play_again(self):
-        self.playAgainVar = None
-        while self.playAgainVar == None:
-            self.getMouse() # agaiinVar defaults True, callback --> to False
-        return self.playAgainVar
+        self.getMouse()
 
     def show_state(self, guesses):
         guessDisplay = []
